@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text to Speech</title>
+    <style>
+        body {
+            background-color: mediumspringgreen;
+            color: black;
+
+          }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 2rem;
+            font-style: bold;
+            margin-top: 25px;
+        }
+
+        .box {
+            width: 600px;
+            min-height: 200px;
+            margin: 100px auto 0 auto;
+            padding: 0 0 25px 0;
+
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        .border {
+            border: 10px solid black;
+            border-radius: 25px;
+        }
+
+        .text-center{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        ul {
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="box border">
+    <div class="text-center">
+        <h1>Text to Speech</h1>
+    </div>
+    <div class="text-center">
+        <p>Convert your PDF file into an audiobook</p>
+    </div>
+    <div class="text-center">
+
+        <form method="post" enctype="multipart/form-data">
+            <h4>Choose a Language:</h4>
+            <select name="language" class="form-select mb-2">
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+              </select>
+
+            <input type="file" name="file" accept=".pdf" id="fileInput" hidden>
+          <button type="button"
+                  onclick="document.getElementById('fileInput').click()"
+                  class="btn btn-secondary">
+            Select PDF File
+          </button>
+
+            <!-- Check mark (hidden initially) -->
+          <span id="checkmark" style="display:none; color:green; font-size:20px;">
+            ✔
+          </span>
+
+          <br><br>
+
+          <button type="submit" class="btn btn-primary">
+            Upload
+          </button>
+
+        </form>
+    </div>
+
+    <br>
+
+    <div class="text-center">
+        <h4>{{ message }}  </h4>
+    </div>
+    <div>
+        <ul style="list-style-position: inside;">
+            {% for file in files %}
+            <li>
+                <a href="{{ url_for('static', filename='files/' ~ folder ~ '/' ~ file) }}" download>
+                    {{ file }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
+
+<script>
+document.getElementById("fileInput").addEventListener("change", function () {
+  const check = document.getElementById("checkmark");
+
+  if (this.files.length > 0) {
+    check.style.display = "inline";   // show ✔
+  } else {
+    check.style.display = "none";     // hide if no file
+  }
+});
+</script>
+
+</body>
+</html>
