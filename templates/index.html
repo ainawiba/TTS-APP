@@ -94,16 +94,11 @@
     <div class="text-center">
         <h4>{{ message }}  </h4>
     </div>
-    <div>
-        <ul style="list-style-position: inside;">
-            {% for file in files %}
-            <li>
-                <a href="{{ url_for('static', filename='files/' ~ folder ~ '/' ~ file) }}" download>
-                    {{ file }}
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="text-center">
+
+            <a href="{{ url_for('static', filename='files/' ~ folder ~ '/' ~ file) }}" download>
+                {{ file }}
+            </a>
 
     </div>
 </div>
